@@ -2,8 +2,11 @@ package main;
 
 public class Servidor {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	int porta = 8787;
+	
+	public static void main(String[] args) { 
+	
+
 
 	}
 

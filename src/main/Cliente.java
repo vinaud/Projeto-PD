@@ -1,11 +1,12 @@
 package main;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Scanner;
 
-public class Usuario {
+public class Cliente {
 
 	public static boolean login(String username, String senha)
 	{
@@ -35,7 +36,7 @@ public class Usuario {
 		Socket socket = null;
 		Scanner scan= new Scanner(System.in);
 		
-		System.out.println("Insira o usuário");
+		System.out.println("Insira o usuï¿½rio");
 		String user = scan.nextLine();
 		
 		System.out.println("Insira a senha");
