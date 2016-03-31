@@ -8,16 +8,14 @@ import java.util.Scanner;
 
 public class Cliente {
 
-	public static boolean login(String username, String senha)
-	{
-		Socket s = null;
-				
+	public static boolean login(String username, String senha) {
+		Socket socket = null;
 				try {
-					s = new Socket("localhost", 6789);
+					socket = new Socket("localhost", 8787);
 					
 					/*conectar com servidor e fazer o login */
 					
-					s.close();
+					socket.close();
 					return true;
 					
 				} catch (UnknownHostException e) {
@@ -43,17 +41,13 @@ public class Cliente {
 		String senha = scan.nextLine();
 		
 		scan.close();
-		if (login(user,senha))
-		{
+		if (login(user,senha)) {
 
 			
 		
 		}
-		else
-		{
+		else {
 			System.out.println("Usuario ou senha invalido");
 		}
-		
 	}
-
 }
