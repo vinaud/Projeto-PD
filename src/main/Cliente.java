@@ -31,6 +31,11 @@ public class Cliente {
 		
 	}
 	
+		public static String execomando(String comando)
+		{
+			return comando;
+			
+		}
 		
 	public static void main(String[] args) {
 		
@@ -61,7 +66,10 @@ public class Cliente {
 			System.out.println("Insira Listar, Download ou Sair");
 			comando = scan.nextLine();
 			
-			//chamar função para enviar comando ao servidor
+			String result;
+			result = execomando(comando);
+			
+			System.out.println("Resultado da operação: \n" + result);
 			
 			}
 			
