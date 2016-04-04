@@ -30,24 +30,42 @@ public class Cliente {
 		
 		
 	}
+	
+		
 	public static void main(String[] args) {
-		Socket socket = null;
+		
 		Scanner scan= new Scanner(System.in);
+		String user ="";
+		String senha ="";
 		
-		System.out.println("Insira o usuï¿½rio");
-		String user = scan.nextLine();
-		
-		System.out.println("Insira a senha");
-		String senha = scan.nextLine();
-		
-		scan.close();
-		if (login(user,senha)) {
-
+		while (!login(user,senha))
+		{
+			System.out.println("Insira o usuï¿½rio");
+			 user = scan.nextLine();
 			
-		
-		}
-		else {
+			System.out.println("Insira a senha");
+			 senha = scan.nextLine();
+			
+			scan.close();
+			
+			
+			
 			System.out.println("Usuario ou senha invalido");
 		}
+		
+		String comando = "";
+		
+			while (!comando.equalsIgnoreCase("sair"))
+			{
+				
+			System.out.println("Insira Listar, Download ou Sair");
+			comando = scan.nextLine();
+			
+			//chamar função para enviar comando ao servidor
+			
+			}
+			
+		
+		
 	}
 }
