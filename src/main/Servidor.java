@@ -5,14 +5,13 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 import conexao.Conexao;
+import utils.Constantes;
 
 public class Servidor {
-
-	static int porta = 8787;
 	
-	public static void main(String[] args) { 
+	public static void aceitarLogin() {
 		try {
-			ServerSocket servidorSocket = new ServerSocket(porta);
+			ServerSocket servidorSocket = new ServerSocket(Constantes.PORTA_LOGIN);
 			while(true) {
 				Socket cliente = servidorSocket.accept();
 				Conexao conexao = new Conexao(cliente);
@@ -21,6 +20,24 @@ public class Servidor {
 			e.printStackTrace();
 			System.out.println("Erro na porta: " + e.getMessage());
 		}
+	}
+	
+	public static void aceitarServico() {
+		try {
+			ServerSocket servidorSocket = new ServerSocket(Constantes.PORTA_SERVICO);
+			while(true) {
+				Socket cliente = servidorSocket.accept();
+				Conexao conexao = new Conexao(cliente);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.out.println("Erro na porta: " + e.getMessage());
+		}
+	}
+	
+	public static void main(String[] args) { 
+		aceitarLogin();
+		aceitarServico();
 	}
 
 }

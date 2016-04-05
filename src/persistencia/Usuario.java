@@ -2,11 +2,18 @@ package persistencia;
 
 import java.io.Serializable;
 
-public class Usuario implements Serializable {
+import utils.Constantes;
 
+public class Usuario implements Serializable {
 	private String username;
 	private String senha;
-	private String email;
+	private Estado estado;
+	
+	public Usuario(String username, String senha) {
+		this.username = username;
+		this.senha = senha;
+		estado.setEstado(Constantes.DESLOGADO);
+	}
 	
 	public String getUsername() {
 		return username;
@@ -20,10 +27,22 @@ public class Usuario implements Serializable {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	public String getEmail() {
-		return email;
+	
+	public Boolean estarLogado() {
+		if (estado.getEstado() == Constantes.LOGADO) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
-	public void setEmail(String email) {
-		this.email = email;
+
+	public void setEstadoLogado() {
+		estado.setEstado(Constantes.LOGADO);
 	}
+	
+	public void setEstadoDeslogado() {
+		estado.setEstado(Constantes.DESLOGADO);
+	}
+
 }
