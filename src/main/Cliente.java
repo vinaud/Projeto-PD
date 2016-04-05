@@ -1,6 +1,8 @@
 package main;
 
+import java.io.DataInputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -8,14 +10,23 @@ import java.util.Scanner;
 
 public class Cliente {
 
+	public Cliente(String username, String senha) {
+		// TODO Auto-generated constructor stub
+	}
+
 	public static boolean login(String username, String senha) {
 		Socket socket = null;
 				try {
 					socket = new Socket("localhost", 8787);
+					ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+					Cliente cliente = new Cliente(username, senha);
+					oos.writeObject(cliente);
 					
-					/*conectar com servidor e fazer o login */
+					DataInputStream in = new DataInputStream(socket.getInputStream());
+					String resultado = in.readUTF();
 					
 					socket.close();
+					if (resultado.equals("true"))
 					return true;
 					
 				} catch (UnknownHostException e) {
@@ -33,7 +44,7 @@ public class Cliente {
 	
 		public static String execomando(String comando)
 		{
-			return comando;
+			return "";
 			
 		}
 		
@@ -45,7 +56,7 @@ public class Cliente {
 		
 		while (!login(user,senha))
 		{
-			System.out.println("Insira o usu�rio");
+			System.out.println("Insira o usuario");
 			 user = scan.nextLine();
 			
 			System.out.println("Insira a senha");
@@ -53,8 +64,7 @@ public class Cliente {
 			
 			scan.close();
 			
-			
-			
+		
 			System.out.println("Usuario ou senha invalido");
 		}
 		
