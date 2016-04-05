@@ -1,6 +1,8 @@
 package main;
 
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
@@ -44,7 +46,29 @@ public class Cliente {
 	
 		public static String execomando(String comando)
 		{
-			return "";
+			Socket socket = null;
+			String resultado = "";
+			try {
+				socket = new Socket("localhost", 8787);
+				
+				DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+				DataInputStream in = new DataInputStream(socket.getInputStream());
+				FileInputStream down;
+				out.writeUTF(comando);
+				resultado = in.readUTF();
+				
+				
+				socket.close();
+				
+				
+			} catch (UnknownHostException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return resultado;
 			
 		}
 		
@@ -79,7 +103,7 @@ public class Cliente {
 			String result;
 			result = execomando(comando);
 			
-			System.out.println("Resultado da operação: \n" + result);
+			System.out.println("Resultado da operação de "+ comando + " : \n" + result);
 			
 			}
 			
