@@ -4,10 +4,13 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import comando.Reply;
+import comando.Request;
 import main.Cliente;
 import utils.Constantes;
 
@@ -48,20 +51,43 @@ public abstract class ConexaoCliente {
 			String resultado = "";
 			try {
 				socket = new Socket("localhost", Constantes.PORTA_SERVICO);
-				
-				DataOutputStream out = new DataOutputStream(socket.getOutputStream());
-				DataInputStream in = new DataInputStream(socket.getInputStream());
 				FileInputStream down;
-				out.writeUTF(comando);
-				resultado = in.readUTF();
+				ObjectOutputStream send = new ObjectOutputStream(socket.getOutputStream());
+				Request request;
+				
+				ObjectInputStream get = new ObjectInputStream(socket.getInputStream());
+				Reply reply;
+				
+				if (comando.equalsIgnoreCase("listar"))
+				{
+					
+				}
+				else if (comando.equalsIgnoreCase("download"))
+				{
+					
+				}
+				else if (comando.equalsIgnoreCase("upload"))
+				{
+					
+				}
+				else
+				{
+					return("ERROW!!!!1!!!! Comando inválido");
+				}
 				
 			
-				socket.close();
+				
 				
 				
 			} catch (UnknownHostException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				socket.close();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

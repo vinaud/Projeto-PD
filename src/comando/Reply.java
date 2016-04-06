@@ -1,6 +1,12 @@
 package comando;
 
-public class Reply {
+import java.io.Serializable;
+
+public class Reply implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8551985180589119184L;
 	private String resposta;
 	private String path;
 	
