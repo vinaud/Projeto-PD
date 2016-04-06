@@ -8,6 +8,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.List;
 
 import comando.Reply;
 import comando.Request;
@@ -60,7 +61,25 @@ public abstract class ConexaoCliente {
 				
 				if (comando.equalsIgnoreCase("listar"))
 				{
-					
+					try {
+						send.writeObject(request);
+						System.out.println("Requisição enviada ao servidor");
+						
+						reply =(Reply) get.readObject();
+						System.out.println("Resposta obtida");
+						System.out.println("Arquivos no diretório: ");
+						List<String> l = reply.getListagemArquivos();
+						
+						for(int i = 0; i < l.size();i++)
+						{
+							System.out.println(l.get(i));
+						}
+						return reply.getResposta();
+						
+					} catch (ClassNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 				else if (comando.equalsIgnoreCase("download"))
 				{

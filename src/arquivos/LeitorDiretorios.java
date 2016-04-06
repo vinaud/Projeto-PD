@@ -1,5 +1,6 @@
 package arquivos;
 
+import java.awt.List;
 import java.io.File;
 
 public class LeitorDiretorios {
@@ -10,5 +11,12 @@ public class LeitorDiretorios {
 	public LeitorDiretorios()
 	{
 		
+	}
+
+	
+	
+	public static java.util.List<String> listagemArquivos(String path2) {
+		// retorna lista de arquivos do caminho passado
+		return null;
 	}
 }

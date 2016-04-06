@@ -6,6 +6,7 @@ import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import arquivos.LeitorDiretorios;
 import comando.Reply;
 import comando.Request;
 import utils.Constantes;
@@ -25,7 +26,8 @@ public class ConexaoServidorComando extends Thread {
 					Reply reply = new Reply();
 					if(request.getComando().equals("listar")) {
 						
-					reply.setResposta(this.listagemDiretorio(request.getPath()));	
+					reply.setListagemArquivos(LeitorDiretorios.listagemArquivos(request.getPath()));	
+					reply.setResposta("ok");
 						
 					} else if (request.getComando().equals("download")) {
 						
@@ -33,6 +35,7 @@ public class ConexaoServidorComando extends Thread {
 						
 					}
 					dos.writeObject(reply);
+					System.out.println("Resposta enviada ao cliente");
 				}
 			}
 		} catch (IOException e) {
@@ -44,8 +47,5 @@ public class ConexaoServidorComando extends Thread {
 		} 
 	}
 
-	private String listagemDiretorio(String diretorio) {
-		// TODO Auto-generated method stub
-		return "";
-	}
+	
 }
