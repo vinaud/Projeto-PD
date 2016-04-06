@@ -53,7 +53,7 @@ public abstract class ConexaoCliente {
 				socket = new Socket("localhost", Constantes.PORTA_SERVICO);
 				FileInputStream down;
 				ObjectOutputStream send = new ObjectOutputStream(socket.getOutputStream());
-				Request request;
+				Request request = new Request(comando);
 				
 				ObjectInputStream get = new ObjectInputStream(socket.getInputStream());
 				Reply reply;

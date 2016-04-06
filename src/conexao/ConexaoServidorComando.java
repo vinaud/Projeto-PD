@@ -1,7 +1,5 @@
 package conexao;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -10,7 +8,6 @@ import java.net.Socket;
 
 import comando.Reply;
 import comando.Request;
-import persistencia.Usuario;
 import utils.Constantes;
 
 public class ConexaoServidorComando extends Thread {
@@ -25,15 +22,17 @@ public class ConexaoServidorComando extends Thread {
 				ObjectOutputStream dos = new ObjectOutputStream(cliente.getOutputStream());
 				while(true) {
 					Request request = (Request) ois.readObject();
+					Reply reply = new Reply();
 					if(request.getComando().equals("listar")) {
-						Reply reply = new Reply();
 						
-						dos.writeObject(reply);
+					reply.setResposta(this.listagemDiretorio(request.getPath()));	
+						
 					} else if (request.getComando().equals("download")) {
 						
-					} else {
+					} else if (request.getComando().equals("upload")){
 						
 					}
+					dos.writeObject(reply);
 				}
 			}
 		} catch (IOException e) {
@@ -43,5 +42,10 @@ public class ConexaoServidorComando extends Thread {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
+	}
+
+	private String listagemDiretorio(String diretorio) {
+		// TODO Auto-generated method stub
+		return "";
 	}
 }
