@@ -14,15 +14,18 @@ import utils.Constantes;
 
 public class ConexaoServidorLogin extends Thread {
 			
+	private ServerSocket servidorSocket;
+
 	public void run () {
 		try {
-			ServerSocket servidorSocket = new ServerSocket(Constantes.PORTA_LOGIN);
+			servidorSocket = new ServerSocket(Constantes.PORTA_LOGIN);
 			while(true) {
 				Socket cliente = servidorSocket.accept();
 				ObjectInputStream ois = new ObjectInputStream(cliente.getInputStream());
 				while(true) {
 					String resposta = "recusado";
-					Usuario usuario = (Usuario) ois.readObject();
+					Usuario usuario;
+					 usuario = (Usuario) ois.readObject();
 					
 					UsuarioDAO userDAO = new UsuarioDAO();
 					List<Usuario> listUser = userDAO.getUsuarios();

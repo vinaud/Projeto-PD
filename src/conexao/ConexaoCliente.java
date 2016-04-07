@@ -15,6 +15,7 @@ import java.util.List;
 import comando.Reply;
 import comando.Request;
 import main.Cliente;
+import persistencia.Usuario;
 import utils.Constantes;
 
 public abstract class ConexaoCliente {
@@ -25,7 +26,7 @@ public abstract class ConexaoCliente {
 				try {
 					socket = new Socket("localhost", Constantes.PORTA_LOGIN);
 					ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
-					Cliente cliente = new Cliente(username, senha);
+					Usuario cliente = new Usuario(username, senha);
 					oos.writeObject(cliente);
 					
 					DataInputStream in = new DataInputStream(socket.getInputStream());

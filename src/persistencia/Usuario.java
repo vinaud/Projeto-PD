@@ -8,15 +8,15 @@ public class Usuario implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+
 	private String username;
 	private String senha;
-	private Estado estado;
+	private int estado;
 	
 	public Usuario(String username, String senha) {
 		this.username = username;
 		this.senha = senha;
-		estado.setEstado(Constantes.DESLOGADO);
+		 setEstadoDeslogado();
 	}
 	
 	public String getUsername() {
@@ -33,7 +33,7 @@ public class Usuario implements Serializable {
 	}
 	
 	public Boolean estarLogado() {
-		if (estado.getEstado() == Constantes.LOGADO) {
+		if (estado == Constantes.LOGADO) {
 			return true;
 		}
 		else {
@@ -42,11 +42,11 @@ public class Usuario implements Serializable {
 	}
 
 	public void setEstadoLogado() {
-		estado.setEstado(Constantes.LOGADO);
+		this.estado=Constantes.LOGADO;
 	}
 	
 	public void setEstadoDeslogado() {
-		estado.setEstado(Constantes.DESLOGADO);
+		this.estado=Constantes.DESLOGADO;
 	}
 
 }

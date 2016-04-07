@@ -18,8 +18,8 @@ public class Cliente implements Serializable {
 		Scanner scan= new Scanner(System.in);
 		String user ="";
 		String senha ="";
-		
-		while (!ConexaoCliente.login(user,senha))
+		boolean logado = false;
+		do
 		{
 			System.out.println("Insira o usuario");
 			 user = scan.nextLine();
@@ -27,11 +27,15 @@ public class Cliente implements Serializable {
 			System.out.println("Insira a senha");
 			 senha = scan.nextLine();
 			
-			
-		
+			logado = ConexaoCliente.login(user,senha);
+			if(!logado)
+			{
 			System.out.println("Usuario ou senha invalido");
-		}
+			}
+			
+		}while (!logado);
 		
+		System.out.println("Login efetuado com sucesso");
 		String comando = "";
 		
 			while (!comando.equalsIgnoreCase("sair"))
