@@ -86,6 +86,22 @@ public class LeitorDiretorios {
 		}
 	}
 	
+	public void percorrerDiretorio(File diretorio) {
+		File[] list = diretorio.listFiles();
+		for(int k=0;k<list.length;k++)
+		{
+			if(list[k].isDirectory())
+			{
+				percorrerDiretorio(list[k]);
+			}
+			else
+			{
+				System.out.println(list[k].getName() +"\t\t"+"apenas em "+ list[k].getParent());
+			}
+		}
+		
+	}
+
 	public String checksum(File arquivo) {
 		try {
 		    InputStream fin = new FileInputStream(arquivo);
@@ -112,6 +128,8 @@ public class LeitorDiretorios {
 		    return null;
 		}
 	}
+	
+	
 	
 	public void listarDiretorio(String nomeDiretorio, ArrayList<File> arquivos) {
 		File diretorio = new File(nomeDiretorio);
