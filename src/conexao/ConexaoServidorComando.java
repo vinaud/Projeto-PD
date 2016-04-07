@@ -1,16 +1,14 @@
 package conexao;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import arquivos.LeitorDiretorios;
 import comando.Reply;
 import comando.Request;
-import persistencia.Usuario;
 import utils.Constantes;
 
 public class ConexaoServidorComando extends Thread {
@@ -25,15 +23,19 @@ public class ConexaoServidorComando extends Thread {
 				ObjectOutputStream dos = new ObjectOutputStream(cliente.getOutputStream());
 				while(true) {
 					Request request = (Request) ois.readObject();
+					Reply reply = new Reply();
 					if(request.getComando().equals("listar")) {
-						Reply reply = new Reply();
 						
-						dos.writeObject(reply);
+					reply.setListagemArquivos(LeitorDiretorios.listagemArquivos(request.getPath()));	
+					reply.setResposta("ok");
+						
 					} else if (request.getComando().equals("download")) {
 						
-					} else {
+					} else if (request.getComando().equals("upload")){
 						
 					}
+					dos.writeObject(reply);
+					System.out.println("Resposta enviada ao cliente");
 				}
 			}
 		} catch (IOException e) {
@@ -44,4 +46,6 @@ public class ConexaoServidorComando extends Thread {
 			e.printStackTrace();
 		} 
 	}
+
+	
 }
