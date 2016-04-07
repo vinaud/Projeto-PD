@@ -2,12 +2,14 @@ package conexao;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.List;
 
 import comando.Reply;
@@ -30,7 +32,7 @@ public abstract class ConexaoCliente {
 					String resultado = in.readUTF();
 					
 					socket.close();
-					if (resultado.equals("true"))
+					if (resultado.equals("aceito"))
 					return true;
 					
 				} catch (UnknownHostException e) {
@@ -63,16 +65,16 @@ public abstract class ConexaoCliente {
 				{
 					try {
 						send.writeObject(request);
-						System.out.println("Requisição enviada ao servidor");
+						System.out.println("Requisiï¿½ï¿½o enviada ao servidor");
 						
 						reply =(Reply) get.readObject();
 						System.out.println("Resposta obtida");
-						System.out.println("Arquivos no diretório: ");
-						List<String> l = reply.getListagemArquivos();
+						System.out.println("Arquivos no diretï¿½rio: ");
+						ArrayList<File> l = reply.getListagemArquivos();
 						
 						for(int i = 0; i < l.size();i++)
 						{
-							System.out.println(l.get(i));
+							System.out.println(l.get(i).getName());
 						}
 						return reply.getResposta();
 						
@@ -91,7 +93,7 @@ public abstract class ConexaoCliente {
 				}
 				else
 				{
-					return("ERROW!!!!1!!!! Comando inválido");
+					return("ERROW!!!!1!!!! Comando invï¿½lido");
 				}
 				
 			

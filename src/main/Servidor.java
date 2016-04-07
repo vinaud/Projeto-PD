@@ -5,7 +5,6 @@ import conexao.ConexaoServidorLogin;
 
 public class Servidor {
 
-	
 	public static void main(String[] args) { 
 		
 	ConexaoServidorLogin c1 = new ConexaoServidorLogin();

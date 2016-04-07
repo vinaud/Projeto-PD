@@ -1,10 +1,12 @@
 package conexao;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 
 import arquivos.LeitorDiretorios;
 import comando.Reply;
@@ -25,8 +27,9 @@ public class ConexaoServidorComando extends Thread {
 					Request request = (Request) ois.readObject();
 					Reply reply = new Reply();
 					if(request.getComando().equals("listar")) {
-						
-					reply.setListagemArquivos(LeitorDiretorios.listagemArquivos(request.getPath()));	
+					ArrayList<File> listaArquivos = new ArrayList<>();	
+					LeitorDiretorios.listarDiretorio(request.getPath(), listaArquivos);	
+					reply.setListagemArquivos(listaArquivos);
 					reply.setResposta("ok");
 						
 					} else if (request.getComando().equals("download")) {

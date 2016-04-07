@@ -1,10 +1,11 @@
 package main;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
 import conexao.ConexaoCliente;
 
-public class Cliente {
+public class Cliente implements Serializable {
 
 	public Cliente(String username, String senha) {
 		

@@ -6,8 +6,10 @@ import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.List;
 
 import persistencia.Usuario;
+import persistencia.UsuarioDAO;
 import utils.Constantes;
 
 public class ConexaoServidorLogin extends Thread {
@@ -19,10 +21,18 @@ public class ConexaoServidorLogin extends Thread {
 				Socket cliente = servidorSocket.accept();
 				ObjectInputStream ois = new ObjectInputStream(cliente.getInputStream());
 				while(true) {
-					String resposta = "Aceito";
+					String resposta = "recusado";
 					Usuario usuario = (Usuario) ois.readObject();
 					
-					// Verificar se estar no BD
+					UsuarioDAO userDAO = new UsuarioDAO();
+					List<Usuario> listUser = userDAO.getUsuarios();
+					
+					for(int i = 0; i < listUser.size(); i++) {
+						if(usuario.getUsername().equals(listUser.get(i).getUsername()) 
+								&& usuario.getSenha().equals(listUser.get(i).getSenha())) {
+							resposta = "aceito";
+						}
+					}
 					
 					DataOutputStream dos = new DataOutputStream(cliente.getOutputStream());
 					dos.writeUTF(resposta);

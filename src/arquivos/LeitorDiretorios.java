@@ -2,6 +2,8 @@ package arquivos;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Path;
@@ -99,7 +101,6 @@ public class LeitorDiretorios {
 				System.out.println(list[k].getName() +"\t\t"+"apenas em "+ list[k].getParent());
 			}
 		}
-		
 	}
 
 	public String checksum(File arquivo) {
@@ -129,30 +130,39 @@ public class LeitorDiretorios {
 		}
 	}
 	
-	
-	
-	public void listarDiretorio(String nomeDiretorio, ArrayList<File> arquivos) {
-		File diretorio = new File(nomeDiretorio);
+	public static void listarDiretorio(String caminhoDiretorio, ArrayList<File> arquivos) {
+		File diretorio = new File(caminhoDiretorio);
 		File[] listaArquivos = diretorio.listFiles();
 		
 		for(File arquivo : listaArquivos) {
 			if(arquivo.isFile()) {
 				arquivos.add(arquivo);
+				System.out.println("\n -" + arquivo.getName());
 			} else if (arquivo.isDirectory()){
+				System.out.println("\n ++" + arquivo.getName());
 				listarDiretorio(arquivo.getAbsolutePath(), arquivos);
 			}
 		}
 	}
 	
-	public void adicionarArquivo(Path caminho, File arquivo) {
+	public void adicionarArquivo(File arquivo, byte[] conteudo) throws IOException {
+		try {
+			FileOutputStream fop = new FileOutputStream(arquivo);
+			fop.write(conteudo);
+			fop.flush();
+			fop.close();
+		
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 		
 	}
 	
-	public void removerArquivo(Path caminho, File arquivo) {
+	public void removerArquivo(String caminho, File arquivo) {
 		
 	}
 	
-	public void atualizarArquivo(Path caminho, File arquivo) {
+	public void atualizarArquivo(String caminho, File arquivoAntigo, File arquivoNovo) {
 		
 	}
 
